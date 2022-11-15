@@ -1,17 +1,18 @@
+from django.shortcuts import render
 
 from django.http import HttpResponse
-# Create your views here.
+
 def indexPageView(request) :
-    return HttpResponse('Hello Universe!')   
+    return render(request, 'pages/index.html')   
 
 def reviewsPageView(request):
-    return HttpResponse("These are our reviews!")
+    return render(request, 'pages/reviews.html') 
 
 def searchPageView(request):
-    return HttpResponse("Search our reviews!")
+    return render(request, 'pages/search.html') 
 
 def addPageView(request):
-    return HttpResponse("Add to our reviews!")
+    return render(request, 'pages/add.html') 
     
                
             
