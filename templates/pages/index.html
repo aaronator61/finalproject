@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block header %}
+<title>Home</title>
+{% endblock %}
+{% block content %}
+<div>
+    <h1>Cruise Reviews!</h1>
+    <h5>Planning your next cruise starts here!</h5>
+    <button onclick="window.location.href={% url 'reviews' %}">Reviews</button>
+    <button onclick="window.location.href={% url 'search' %}">Search</button>
+    <button onclick="window.location.href={% url 'add' %}">Add a Review</button>
+</div>
+{% endblock %}
