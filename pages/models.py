@@ -1,45 +1,52 @@
 from django.db import models
 from datetime import datetime, timedelta
+from django import forms
+
             
  # Create your models here.
-class CruiseLine(models.Model):
-    CruiseLineName = models.CharField(max_length=30)
-    
-    def __str__(self) :
-        return (self.CruiseLineName)
-            
-#changed class name
-class Ship(models.Model) :
-    cruise_line = models.ForeignKey(CruiseLine, models.CASCADE)
-    ship_name = models.CharField(max_length=50)
-
-    def __str__ (self):
-        return (self.ship_name)
-
-class Trip(models.Model):
-    location = models.CharField(max_length=50)
-    start_date = models.DateField(default=datetime.today, blank=True)
-    trip_length = models.IntegerField(default=0)
-    ship = models.ManyToManyField(Ship, blank=True)
-
-    @property
-    def return_date(self) :
-        return (self.start_date + timedelta(days=self.trip_length))
-
-class User(models.Model):
-    username = models.CharField(max_length=20)
-    password = models.CharField(max_length=20)
-    email = models.EmailField(max_length=100)
+class Review(models.Model):
+    reviewer_name = models.CharField("User Name", default='', max_length=30)
+    cruise_choices = [
+        ('Carnival', 'Carnival'),
+        ('Celestyal', 'Celestyal'),
+        ('Costa', 'Costa'),
+        ('Disney', 'Disney'),
+        ('MSC', 'MSC'),
+        ('Norwegian', 'Norwegian'),
+        ('Princess', 'Princess'),
+        ('Royal Carribean International', 'Royal Carribean International'),
+        ('Virgin Voyages', 'Virgin Voyages'),
+        ('Azamara', 'Azamara'),
+        ('Celebrity', 'Celebrity'),
+        ('Holland America', 'Holland America'),
+        ('Oceania', 'Oceania'),
+        ('Viking', 'Viking'),
+        ('Cunard', 'Cunard'),
+        ('Regent Seven Seas', 'Regent Seven Seas'),
+        ('Seabourn', 'Seabourn'),
+        ('Sea Dream', 'Sea Dream'),
+        ('Silversea', 'Silversea'),
+        ('Swan Hellenic', 'Swan Hellenic'),
+        ('Windstar', 'Windstar')
+    ]
+    cruise_liner_name = models.CharField("Cruise Line", default="Carnival", max_length=30, choices=cruise_choices)
+    ship_name = models.CharField("Ship Name", null=True, max_length=30)
+    general_location = models.CharField("General Location", null=True, max_length=30)
+    start_date = models.DateField("Start Date (YYYY-MM-DD)", null=True)
+    length_in_days = models.IntegerField("Length of Trip (in days)", null=True)
+    star_choices = {
+        (1,1),
+        (2,2),
+        (3,3),
+        (5,5),
+        (4,4)
+        
+    }
+    star_rating = models.IntegerField("Star Rating", default=3, choices=star_choices)
+    comments = models.CharField("Comments", null=True, max_length=255)
 
     def __str__(self):
-        return (self.username)
-    
-    #override the save method
-    def save(self):
-        super(User, self).save() # Call the "real" save() method.
+        return (self.reviewer_name)
 
-class Review(models.Model) :
-    trip = models.ForeignKey(Trip, models.CASCADE)
-    user = models.ForeignKey(User, models.CASCADE)
-    Rating = models.IntegerField(default=0)
-    description = models.CharField(max_length=150)
+    class Meta:
+        db_table = 'review'
