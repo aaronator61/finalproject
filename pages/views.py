@@ -66,7 +66,7 @@ def addPageView(request):
         if request.POST['general_location'] != '':
             review.general_location = request.POST['general_location']
         if request.POST['start_date'] != '':
-            review.start_date = dt.date(request.POST['start_date'])
+            review.start_date = request.POST['start_date']
         if request.POST['length_in_days'] != '':
             review.length_in_days = request.POST['length_in_days']
         review.star_rating = request.POST['star_rating']
@@ -83,11 +83,25 @@ def addPageView(request):
         }
         return render(request, 'pages/add.html', context) 
 
-def UpdateReview(request):
+def updateReview(request, id):
+    form = ReviewForm()
     if request.method == 'POST':
-        
-        
-
-        review.save()
-    return reviewsPageView(request)    
+       review = Review() 
+       review.reviewer_name =  request.POST['reviewer_name']
+       review.cruise_liner_name = request.POST['cruise_liner_name']
+       review.ship_name = request.POST['ship_name']
+       review.general_location = request.POST['general_location']
+       review.start_date = dt.date(request.POST['start_date'])
+       review.length_in_days = request.POST['length_in_days']
+       review.star_rating = request.POST['star_rating']
+       review.comments = request.POST['comments']
+       
+       review.save()
+    else:
+        data = Review.objects.filter(id=id)
+        context = {
+            'data': data,
+            'form': form
+        }
+        return render(request, 'pages/update.html', context)    
             

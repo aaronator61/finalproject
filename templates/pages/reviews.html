@@ -3,9 +3,15 @@
 {% load crispy_forms_tags %}
 {% block header %}
 <title>Reviews</title>
+<style>
+    .margin {
+        margin-right: 30%;
+        margin-left: 30%;
+    }
+</style>
 {% endblock %}
 {% block content %}
-<div>
+<div class="margin">
     <form method='POST' action="{% url 'reviews' %}">
         {% csrf_token %}
         {{form|crispy}}
@@ -17,7 +23,7 @@
     <h1>Review List</h1>
     <ul>
         {% for review in data %}
-        <li>Reviewer: {{review.reviewer_name}}</li>
+        <li>Reviewer: {{review.reviewer_name}}</li> 
         <li>Cruise Liner: {{review.cruise_liner_name}}</li>
         <li>Ship: {{review.ship_name}}</li>
         <li>General Location: {{review.general_location}}</li>
@@ -25,7 +31,12 @@
         <li>Length in Days: {{review.length_in_days}}</li>
         <li>Star Rating: {{review.star_rating}}</li>
         <li>Comments: {{review.comments}}</li>
+        <span>
+            <button type='button'><a href="{% url 'update' id=review.id%}">Edit</a></button>
+            {% comment %} <button type='button' onclick='{% url 'update' id=review.id %}'>Delete</button> {% endcomment %}
+        </span>
         <br><br>
+
         {% endfor %}
 
     </ul>
