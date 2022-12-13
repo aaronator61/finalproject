@@ -57,17 +57,40 @@
                     <input type="text" name="reviewer_name" id="reviewer_name" value="{{review.reviewer_name}}"><br>
 
                     <label for="cruise_liner_name">Cruise Line</label>
-                    <input type="text" name="cruise_liner_name" id="cruise_liner_name" value="{{review.cruise_liner_name}}"><br>
+                    <select type="text" name="cruise_liner_name" id="cruise_liner_name" value="{{review.cruise_liner_name}}">
+                        <option value="Carnival"{% if review.cruise_liner_name  == 'Carnival' %}selected{% endif %}>Carnival</option>
+                        <option value="Celestyal"{% if review.cruise_liner_name  == 'Celestyal' %}selected{% endif %}>Celestyal</option>
+                        <option value="Costa"{% if review.cruise_liner_name  == 'Costa' %}selected{% endif %}>Costa</option>
+                        <option value="Disney"{% if review.cruise_liner_name  == 'Disney' %}selected{% endif %}>Disney</option>
+                        <option value="MSC"{% if review.cruise_liner_name  == 'MSC' %}selected{% endif %}>MSC</option>
+                        <option value="Norwegian"{% if review.cruise_liner_name  == 'Norwegian' %}selected{% endif %}>Norwegian</option>
+                        <option value="Princess"{% if review.cruise_liner_name  == 'Princess' %}selected{% endif %}>Princess</option>
+                        <option value="Royal Carribean International"{% if review.cruise_liner_name  == 'Royal Carribean International' %}selected{% endif %}>Royal Carribean International</option>
+                        <option value="Virgin Voyages"{% if review.cruise_liner_name  == 'Virgin Voyages' %}selected{% endif %}>Virgin Voyages</option>
+                        <option value="Azamara"{% if review.cruise_liner_name  == 'Azamara' %}selected{% endif %}>Azamara</option>
+                        <option value="Celebrity"{% if review.cruise_liner_name  == 'Celebrity' %}selected{% endif %}>Celebrity</option>
+                        <option value="Holland America"{% if review.cruise_liner_name  == 'Holland America' %}selected{% endif %}>Holland America</option>
+                        <option value="Oceania"{% if review.cruise_liner_name  == 'Oceania' %}selected{% endif %}>Oceania</option>
+                        <option value="Viking"{% if review.cruise_liner_name  == 'Viking' %}selected{% endif %}>Viking</option>
+                        <option value="Cunard"{% if review.cruise_liner_name  == 'Cunard' %}selected{% endif %}>Cunard</option>
+                        <option value="Regent Seven Seas"{% if review.cruise_liner_name  == 'Regent Seven Seas' %}selected{% endif %}>Regent Seven Seas</option>
+                        <option value="Seabourn"{% if review.cruise_liner_name  == 'Seabourn' %}selected{% endif %}>Seabourn</option>
+                        <option value="Sea Dream"{% if review.cruise_liner_name  == 'Sea Dream' %}selected{% endif %}>Sea Dream</option>
+                        <option value="Silversea"{% if review.cruise_liner_name  == 'Silversea' %}selected{% endif %}>Silversea</option>
+                        <option value="Swan Hellenic"{% if review.cruise_liner_name  == 'Swan Hellenic' %}selected{% endif %}>Swan Hellenic</option>
+                        <option value="Windstar"{% if review.cruise_liner_name  == 'Windstar' %}selected{% endif %}>Windstar</option>
+                    </select>
+                    <br>
                     <label for="ship_name">Ship Name</label>
                     <input type="text" name="ship_name" id="ship_name" value="{{review.ship_name}}"><br>
                     <label for="general_location">General Location</label>
                     <input type="text" name="general_location" id="general_location" value="{{review.general_location}}"><br>
-                    <label for="month">Month</label><br>
-                    <input type="text" name="month" id="month" value="{{review.month}}"><br>
+                    <label for="month">Month (1-12)</label><br>
+                    <input type="number" name="month" id="month" value="{{review.month}}" max=12 min=1><br>
                     <label for="length_in_days">Length in Days</label>
                     <input type="number" name="length_in_days" id="length_in_days" value="{{review.length_in_days}}"><br>
                     <label for="star_rating">Star Rating</label>
-                    <input type="number" name="star_rating" id="star_rating" value="{{review.star_rating}}"><br>
+                    <input type="number" name="star_rating" id="star_rating" value="{{review.star_rating}}" min=1 max=5><br>
                     <label for="comments">Comments</label>
                     <textarea type="text" name="comments" id="comments">{{review.comments}}</textarea><br>
                     <button type='submit' class='btn btn-success'>Update</button>
