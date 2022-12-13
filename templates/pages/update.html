@@ -1,26 +1,87 @@
-{% extends 'base.html' %}
+{% extends 'base2.html' %}
 {% load static %}
-{% load crispy_forms_tags %}
 {% block header %}
 <title>Update Review</title>
+<style>
+    .margin {
+        margin-right: 30%;
+        margin-left: 30%;
+    }
+    .margin2 {
+        margin-right: 25%;
+        margin-left: 25%;
+    }
+
+    .text {
+        margin-right: 22%;
+        margin-left: 22%;
+        background: rgba(0, 0, 0, .5)
+    }
+    .grid-container1 {
+        display: grid;
+        column-gap: 50px;
+        row-gap: 50px;
+        grid-template-columns: auto;
+        padding: 10px;
+    }
+    .grid-container2 {
+        display: grid;
+        column-gap: 50px;
+        row-gap: 50px;
+        grid-template-columns: auto auto;
+        padding: 10px;
+    }
+      
+    .grid-item {
+        background-color: rgba(173, 216, 230, 0.5);
+        border: 1px solid rgba(0, 0, 0);
+        padding: 20px;
+        text-align: left;
+    }
+</style>
 {% endblock %}
 {% block content %}
-<div>
-    <h1>Update Review</h1>
+<br><br><br><br><br><br>
+<body id="bg" style="background-image: url('{% static "img/newcroppedship.jpg"%}');">    
+    <div class='container'>
+        <div class="text">
+            <div class="margin">
+                <center>
+                    <h1 style='color:white'>Update Review</h1>
+                </center>
+                {%for review in data%}
+                <fieldset>
+                <form name="update" method='POST' action="{% url 'update' id=review.id %}" style='color:white'>
+                    {% csrf_token %}
+                    <label for="reviewer_name">User Name</label>
+                    <input type="text" name="reviewer_name" id="reviewer_name" value="{{review.reviewer_name}}"><br>
 
-    {%for i in data%}
-    <form method='POST' action="{% url 'update' id=9 %}">
-        {% csrf_token %}
-        <fieldset>
-
-        {{form|crispy}}
-
-        <button type='submit'>Submit</button>
-        </fieldset>
-    </form>
+                    <label for="cruise_liner_name">Cruise Line</label>
+                    <input type="text" name="cruise_liner_name" id="cruise_liner_name" value="{{review.cruise_liner_name}}"><br>
+                    <label for="ship_name">Ship Name</label>
+                    <input type="text" name="ship_name" id="ship_name" value="{{review.ship_name}}"><br>
+                    <label for="general_location">General Location</label>
+                    <input type="text" name="general_location" id="general_location" value="{{review.general_location}}"><br>
+                    <label for="month">Month</label><br>
+                    <input type="text" name="month" id="month" value="{{review.month}}"><br>
+                    <label for="length_in_days">Length in Days</label>
+                    <input type="number" name="length_in_days" id="length_in_days" value="{{review.length_in_days}}"><br>
+                    <label for="star_rating">Star Rating</label>
+                    <input type="number" name="star_rating" id="star_rating" value="{{review.star_rating}}"><br>
+                    <label for="comments">Comments</label>
+                    <textarea type="text" name="comments" id="comments">{{review.comments}}</textarea><br>
+                    <button type='submit' class='btn btn-success'>Update</button>
+                </form>
+                </fieldset>
+                <br>
+            </div>
+            <br>
+        </div>
+        <br>
+    </div>
     
     {%endfor%}
-</div>
 
 
+</body>
 {% endblock %}

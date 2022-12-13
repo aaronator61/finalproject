@@ -32,16 +32,30 @@ class Review(models.Model):
     cruise_liner_name = models.CharField("Cruise Line", default="Carnival", max_length=30, choices=cruise_choices)
     ship_name = models.CharField("Ship Name", null=True, max_length=30)
     general_location = models.CharField("General Location", null=True, max_length=30)
-    start_date = models.DateField("Start Date (YYYY-MM-DD)", null=True)
+    month_choices = [
+        (1,1),
+        (2,2),
+        (3,3),
+        (4,4),
+        (5,5),
+        (6,6),
+        (7,7),
+        (8,8),
+        (9,9),
+        (10,10),
+        (11,11),
+        (12,12),
+    ]
+    month = models.CharField("Month", null=True, max_length=10, choices=month_choices)
     length_in_days = models.IntegerField("Length of Trip (in days)", null=True)
-    star_choices = {
+    star_choices = [
         (1,1),
         (2,2),
         (3,3),
         (5,5),
         (4,4)
         
-    }
+    ]
     star_rating = models.IntegerField("Star Rating", default=3, choices=star_choices)
     comments = models.CharField("Comments", null=True, max_length=255)
 

@@ -1,29 +1,79 @@
-{% extends 'base.html' %}
+{% extends 'base2.html' %}
 {% load static %}
 {% block header %}
-<title>Add</title>
 <title>Add Review</title>
 <style>
     .margin {
-        margin-right: 30%;
-        margin-left: 30%;
+        margin-right: 26%;
+        margin-left: 26%;
+    }
+    .margin2 {
+        margin-right: 25%;
+        margin-left: 25%;
+    }
+
+    .text {
+        margin-right: 25%;
+        margin-left: 25%;
+        background: rgba(0, 0, 0, .5)
     }
 </style>
 {% endblock %}
 {% block content %}
 {% load crispy_forms_tags %}
+<body id="bg" style="background-image: url('{% static "img/newcroppedship.jpg"%}');">
+<br><br><br><br><br><br>
+<div class='text'>
 <div class="margin">
-    <h1>Add a Review</h1>
-    <p>If you don't remember a detail, no worries!
+    <center>
+    <h1 style='color:white'>Add a Review</h1>
+    <p style='color:white'>If you don't remember a detail, no worries!
         <br>
         Only the User Name, Cruise Line, and Star Rating are required.
     </p>
-    <form method='POST' action="{% url 'add' %}">
+    </center>
+    <fieldset>
+    <form method='POST' action="{% url 'add' %}" style='color:white'>
         {% csrf_token %}
-        {{form|crispy}}
-        <button type='submit'>Submit</button>
+        {% comment %} {{form|crispy}} {% endcomment %}
+        
+        {{ form.reviewer_name|as_crispy_field }}
+        <div class="form-row">
+            <div class="form-group col-md-6 mb-0">
+              {{ form.cruise_liner_name|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-6 mb-0">
+                {{ form.ship_name|as_crispy_field }}
+              </div>
+        </div>
+        
+        <div class="form-row">
+            <div class="form-group col-md-6 mb-0">
+              {{ form.month|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-6 mb-0">
+                {{ form.length_in_days|as_crispy_field }}
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6 mb-0">
+              {{ form.general_location|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-6 mb-0">
+                {{ form.star_rating|as_crispy_field }}
+            </div>
+        </div>
+        {{ form.comments|as_crispy_field }}
+
+        <button type='submit' class='btn btn-success'>Add Review</button>
+    </fieldset>
     </form>
+    <br>
 </div>
+<br>
+</div>
+<br><br><br><br>
+</body>
 
 
 {% endblock %}

@@ -1,46 +1,93 @@
-{% extends 'base.html' %}
+{% extends 'base2.html' %}
 {% load static %}
 {% load crispy_forms_tags %}
 {% block header %}
 <title>Reviews</title>
 <style>
+    ul {
+        list-style-type: none;
+    }
+    
     .margin {
         margin-right: 30%;
         margin-left: 30%;
     }
+    .grid-container {
+        display: grid;
+        column-gap: 50px;
+        row-gap: 50px;
+        grid-template-columns: auto auto auto;
+        padding: 10px;
+    }
+      
+    .grid-item {
+        background-color: rgba(255, 255, 255);
+        border: 1px solid rgba(0, 0, 0);
+        padding: 20px;
+        text-align: left;
+    }
+    .radius {
+        margin-right: 5%;
+        margin-left: 5%;
+    }
+    img {
+        height: 5%;
+        width: 5%;
+    }
+    body {
+        background-image: url('{% static "img/backgroundtry2.jpg"%}');
+        background-repeat: no-repeat;
+    }
 </style>
 {% endblock %}
 {% block content %}
-<div class="margin">
-    <form method='POST' action="{% url 'reviews' %}">
-        {% csrf_token %}
-        {{form|crispy}}
-        <button type='submit' class="btn btn-success">Search</button>
-    </form>
-    <br>
-    <button type='button' onclick="{% url 'reviews' %}">Advanced Search</button>
-    <br><br>
-    <h1>Review List</h1>
-    <ul>
-        {% for review in data %}
-        <li>Reviewer: {{review.reviewer_name}}</li> 
-        <li>Cruise Liner: {{review.cruise_liner_name}}</li>
-        <li>Ship: {{review.ship_name}}</li>
-        <li>General Location: {{review.general_location}}</li>
-        <li>Start Date: {{review.start_date}}</li>
-        <li>Length in Days: {{review.length_in_days}}</li>
-        <li>Star Rating: {{review.star_rating}}</li>
-        <li>Comments: {{review.comments}}</li>
-        <span>
-            <button type='button'><a href="{% url 'update' id=review.id%}">Edit</a></button>
-            {% comment %} <button type='button' onclick='{% url 'update' id=review.id %}'>Delete</button> {% endcomment %}
-        </span>
+<body id="bg" style="background-image: url('{% static "img/finaltry.jpg"%}');">
+    <br><br><br><br><br><br>
+    <div class="margin">
+        <form method='POST' action="{% url 'reviews' %}">
+            {% csrf_token %}
+            {{form|crispy}}
+            <button type='submit' class="btn btn-success">Search</button>
+        </form>
         <br><br>
-
-        {% endfor %}
-
-    </ul>
-
+    </div>
+    <div class='radius'>
+        <center>
+            <h1>Review List</h1>
+        </center>
+    <div class='grid-container'>
     
-</div>
+    {% for review in data %}
+    <div class='grid-item'>
+        <ul>
+            <b>Reviewer:</b> {{review.reviewer_name}}
+            <br> 
+            <b>Cruise Liner:</b> {{review.cruise_liner_name}}
+            <br>
+            <b>Ship:</b> {{review.ship_name}}
+            <br>
+            <b>General Location:</b> {{review.general_location}}
+            <br>
+            <b>Month:</b> {{review.month}}
+            <br>
+            <b>Length in Days:</b> {{review.length_in_days}}
+            <br>
+            <b>Star Rating:</b> {% if review.star_rating == 1 %} <img src="{% static 'img/gold_star.png' %}"><img src="{% static 'img/gray_star.png' %}"><img src="{% static 'img/gray_star.png' %}"><img src="{% static 'img/gray_star.png' %}"><img src="{% static 'img/gray_star.png' %}">
+            {% elif review.star_rating == 2 %} <img src="{% static 'img/gold_star.png' %}"><img src="{% static 'img/gold_star.png' %}"><img src="{% static 'img/gray_star.png' %}"><img src="{% static 'img/gray_star.png' %}"><img src="{% static 'img/gray_star.png' %}">
+            {% elif review.star_rating == 3 %} <img src="{% static 'img/gold_star.png' %}"><img src="{% static 'img/gold_star.png' %}"><img src="{% static 'img/gold_star.png' %}"><img src="{% static 'img/gray_star.png' %}"><img src="{% static 'img/gray_star.png' %}">
+            {% elif review.star_rating == 4 %} <img src="{% static 'img/gold_star.png' %}"><img src="{% static 'img/gold_star.png' %}"><img src="{% static 'img/gold_star.png' %}"><img src="{% static 'img/gold_star.png' %}"><img src="{% static 'img/gray_star.png' %}">
+            {% else %} <img src="{% static 'img/gold_star.png' %}"><img src="{% static 'img/gold_star.png' %}"><img src="{% static 'img/gold_star.png' %}"><img src="{% static 'img/gold_star.png' %}"><img src="{% static 'img/gold_star.png' %}">
+            {% endif %}
+            <br>
+            <b>Comments:</b> {{review.comments}}
+            <br>
+            <span>
+                <button type='button'><a href="{% url 'update' id=review.id%}">Edit</a></button>
+                <button type='button'><a href="{% url 'delete' id=review.id%}">Delete</a></button>
+            </span>
+            <br><br>
+        </ul>
+    </div>
+    {% endfor %}
+</body>
 {% endblock %}

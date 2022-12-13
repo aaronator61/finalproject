@@ -30,3 +30,7 @@ div.nav li.nav a:hover:not(.active) {
 div.nav .active {
     background-color: #04AA6D;
 }
+
+#bg {
+    background-repeat: no-repeat;
+}
