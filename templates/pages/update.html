@@ -7,12 +7,12 @@
 {% block content %}
 <div>
     <h1>Update Review</h1>
-    <h1>{{data['reviewer_name']}}</h1>
 
     {%for i in data%}
     <form method='POST' action="{% url 'update' id=9 %}">
         {% csrf_token %}
         <fieldset>
+
         {{form|crispy}}
 
         <button type='submit'>Submit</button>
