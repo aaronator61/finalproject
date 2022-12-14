@@ -21,8 +21,8 @@
     }
       
     .grid-item {
-        background-color: rgba(203, 220, 203);
-        border: 1px solid rgba(0, 0, 0);
+        background-color: rgba(241, 233, 219);
+        border: 3px solid rgba(0, 0, 0);
         padding: 20px;
         text-align: left;
         box-shadow: 2px 2px;
@@ -36,13 +36,13 @@
         width: 5%;
     }
     body {
-        background-image: url('{% static "img/backgroundtry2.jpg"%}');
+        background-image: url('{% static "img/reviewsPage.jpg"%}');
         background-repeat: no-repeat;
     }
 </style>
 {% endblock %}
 {% block content %}
-<body id="bg" style="background-image: url('{% static "img/finaltry.jpg"%}');">
+<body id="bg" style="background-image: url('{% static "img/reviewsPage.jpg"%}');">
     <br><br><br><br><br><br>
     <div class="margin">
         <form method='POST' action="{% url 'reviews' %}">
